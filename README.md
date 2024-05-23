@@ -13,7 +13,7 @@ This project is a work in progress built using React, Vite, and Tailwind CSS. It
 1. Clone this repository:
 
    ```bash
-   git clone
+   git clone https://github.com/Resources-Website/NITH-HUB
 
 2. Navigate to the project directory:
    
