@@ -7,7 +7,7 @@
         "amount": "₹703,500",
         "rating": 5,
         "reviews": 56,
-        "image": "/images/nithlogo.png"
+        "image": "/public/nithlogo.png"
     },
     {
         "id": 1,
@@ -85,7 +85,7 @@
         "location": "India",
         "date": "18th March - 20th April",
         "amount": "₹703,500",
-        "rating": 5,
+        "rating": 3,
         "reviews": 56,
         "image": "/images/nithlogo.png"
     }
