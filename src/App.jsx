@@ -5,7 +5,6 @@ import Scholarship from './components/scholarship/Scholarship';
 import AddScholarship from './components/scholarship/AddScholarship';
 import './App.css';
 
-
 function App() {
   return (
     <Router>
