@@ -18,23 +18,18 @@ const Scholarship = () => {
         setEnlargedCard(null);
     };
 
-    const nextCard = () => {
+    const changeCard = (direction) => {
         if (enlargedCard !== null) {
             const currentIndex = scholarships.findIndex(scholarship => scholarship.id === enlargedCard);
-            const nextIndex = (currentIndex + 1) % scholarships.length;
-            console.log("Next card id:", scholarships[nextIndex].id); // Logging next card id
-            setEnlargedCard(scholarships[nextIndex].id);
+            const newIndex = (currentIndex + direction + scholarships.length) % scholarships.length;
+            console.log(`${direction > 0 ? 'Next' : 'Previous'} card id:`, scholarships[newIndex].id);
+            setEnlargedCard(scholarships[newIndex].id);
         }
     };
 
-    const prevCard = () => {
-        if (enlargedCard !== null) {
-            const currentIndex = scholarships.findIndex(scholarship => scholarship.id === enlargedCard);
-            const prevIndex = (currentIndex - 1 + scholarships.length) % scholarships.length;
-            console.log("Previous card id:", scholarships[prevIndex].id); // Logging previous card id
-            setEnlargedCard(scholarships[prevIndex].id);
-        }
-    };
+    const nextCard = () => changeCard(1);
+    const prevCard = () => changeCard(-1);
+
 
     return (
         <div className="bg-gray-900 min-h-screen py-8">
