@@ -32,7 +32,7 @@ const Scholarship = () => {
 
 
     return (
-        <div className="bg-gray-900 min-h-screen py-8">
+        <div className="bg-gray-900 min-h-screen py-8 rounded-lg">
             <div className="max-w-screen-lg mx-auto px-4 relative z-10">
                 {scholarships.map((scholarship) => (
                     <div key={scholarship.id} className="relative">
