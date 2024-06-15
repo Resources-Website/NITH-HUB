@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import scholarshipsData from './scholarships.json';
+import axios from 'axios';
 
 const Scholarship = () => {
     const [scholarships, setScholarships] = useState([]);
     const [enlargedCard, setEnlargedCard] = useState(null);
 
     useEffect(() => {
-        setScholarships(scholarshipsData);
+        const fetchScholarships = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/scholarships');
+                console.log('Fetched scholarships data:', response.data);
+                setScholarships(response.data);
+            } catch (error) {
+                console.error('Error fetching scholarships data:', error);
+            }
+        };
+
+        fetchScholarships();
     }, []);
 
     const enlargeCard = (id) => {
@@ -29,7 +39,6 @@ const Scholarship = () => {
 
     const nextCard = () => changeCard(1);
     const prevCard = () => changeCard(-1);
-
 
     return (
         <div className="bg-gray-900 min-h-screen py-8 rounded-lg">
