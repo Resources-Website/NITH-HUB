@@ -1,73 +1,13 @@
 [
     {
         "id": 1,
-        "title": "1",
-        "location": "ghaziabad",
-        "date": "18th March - 20th April",
-        "amount": "₹703,500",
-        "rating": 5,
-        "reviews": 56,
-        "image": "/public/nithlogo.png"
-    },
-    {
-        "id": 1,
-        "title": "2",
-        "location": "Moradabad",
-        "date": "18th March - 20th April",
-        "amount": "₹703,500",
-        "rating": 5,
-        "reviews": 56,
-        "image": "/images/nithlogo.png"
-    },
-    {
-        "id": 1,
-        "title": "3",
-        "location": "Rampur Bushahr",
-        "date": "18th March - 20th April",
-        "amount": "₹703,500",
-        "rating": 5,
-        "reviews": 56,
-        "image": "/images/nithlogo.png"
-    },
-    {
-        "id": 1,
-        "title": "4",
+        "title": "Smart India Hackathon 2024",
         "location": "India",
         "date": "18th March - 20th April",
         "amount": "₹703,500",
         "rating": 5,
         "reviews": 56,
-        "image": "/images/nithlogo.png"
-    },
-    {
-        "id": 1,
-        "title": "5",
-        "location": "India",
-        "date": "18th March - 20th April",
-        "amount": "₹703,500",
-        "rating": 5,
-        "reviews": 56,
-        "image": "/images/nithlogo.png"
-    },
-    {
-        "id": 1,
-        "title": "6",
-        "location": "India",
-        "date": "18th March - 20th April",
-        "amount": "₹703,500",
-        "rating": 5,
-        "reviews": 56,
-        "image": "/images/nithlogo.png"
-    },
-    {
-        "id": 1,
-        "title": "7",
-        "location": "India",
-        "date": "18th March - 20th April",
-        "amount": "₹703,500",
-        "rating": 5,
-        "reviews": 56,
-        "image": "/images/nithlogo.png"
+        "image": "/nithlogo.png"
     },
     {
         "id": 1,
@@ -77,7 +17,77 @@
         "amount": "₹703,500",
         "rating": 5,
         "reviews": 56,
-        "image": "/images/nithlogo.png"
+        "image": "/nithlogo.png"
+    },
+    {
+        "id": 1,
+        "title": "Smart India Hackathon 2024",
+        "location": "India",
+        "date": "18th March - 20th April",
+        "amount": "₹703,500",
+        "rating": 5,
+        "reviews": 56,
+        "image": "/nithlogo.png"
+    },
+    {
+        "id": 1,
+        "title": "Smart India Hackathon 2024",
+        "location": "India",
+        "date": "18th March - 20th April",
+        "amount": "₹703,500",
+        "rating": 5,
+        "reviews": 56,
+        "image": "/nithlogo.png"
+    },
+    {
+        "id": 1,
+        "title": "4",
+        "location": "India",
+        "date": "18th March - 20th April",
+        "amount": "₹703,500",
+        "rating": 5,
+        "reviews": 56,
+        "image": "/nithlogo.png"
+    },
+    {
+        "id": 1,
+        "title": "Smart India Hackathon 2024",
+        "location": "India",
+        "date": "18th March - 20th April",
+        "amount": "₹703,500",
+        "rating": 5,
+        "reviews": 56,
+        "image": "/nithlogo.png"
+    },
+    {
+        "id": 1,
+        "title": "6",
+        "location": "India",
+        "date": "18th March - 20th April",
+        "amount": "₹703,500",
+        "rating": 5,
+        "reviews": 56,
+        "image": "/nithlogo.png"
+    },
+    {
+        "id": 1,
+        "title": "Smart India Hackathon 2024",
+        "location": "India",
+        "date": "18th March - 20th April",
+        "amount": "₹703,500",
+        "rating": 5,
+        "reviews": 56,
+        "image": "/nithlogo.png"
+    },
+    {
+        "id": 1,
+        "title": "Smart India Hackathon 2024",
+        "location": "India",
+        "date": "18th March - 20th April",
+        "amount": "₹703,500",
+        "rating": 5,
+        "reviews": 56,
+        "image": "/nithlogo.png"
     },
     {
         "id": 2,
@@ -87,6 +97,6 @@
         "amount": "₹703,500",
         "rating": 3,
         "reviews": 56,
-        "image": "/images/nithlogo.png"
+        "image": "/nithlogo.png"
     }
 ]

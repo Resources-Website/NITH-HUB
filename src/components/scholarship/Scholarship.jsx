@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import scholarshipsData from './scholarships.json';
+import axios from 'axios';
 
 const Scholarship = () => {
     const [scholarships, setScholarships] = useState([]);
     const [enlargedCard, setEnlargedCard] = useState(null);
 
     useEffect(() => {
-        setScholarships(scholarshipsData);
+        const fetchScholarships = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/scholarships');
+                console.log('Fetched scholarships data:', response.data);
+                setScholarships(response.data);
+            } catch (error) {
+                console.error('Error fetching scholarships data:', error);
+            }
+        };
+
+        fetchScholarships();
     }, []);
 
     const enlargeCard = (id) => {
@@ -18,26 +28,20 @@ const Scholarship = () => {
         setEnlargedCard(null);
     };
 
-    const nextCard = () => {
+    const changeCard = (direction) => {
         if (enlargedCard !== null) {
             const currentIndex = scholarships.findIndex(scholarship => scholarship.id === enlargedCard);
-            const nextIndex = (currentIndex + 1) % scholarships.length;
-            console.log("Next card id:", scholarships[nextIndex].id); // Logging next card id
-            setEnlargedCard(scholarships[nextIndex].id);
+            const newIndex = (currentIndex + direction + scholarships.length) % scholarships.length;
+            console.log(`${direction > 0 ? 'Next' : 'Previous'} card id:`, scholarships[newIndex].id);
+            setEnlargedCard(scholarships[newIndex].id);
         }
     };
 
-    const prevCard = () => {
-        if (enlargedCard !== null) {
-            const currentIndex = scholarships.findIndex(scholarship => scholarship.id === enlargedCard);
-            const prevIndex = (currentIndex - 1 + scholarships.length) % scholarships.length;
-            console.log("Previous card id:", scholarships[prevIndex].id); // Logging previous card id
-            setEnlargedCard(scholarships[prevIndex].id);
-        }
-    };
+    const nextCard = () => changeCard(1);
+    const prevCard = () => changeCard(-1);
 
     return (
-        <div className="bg-gray-900 min-h-screen py-8">
+        <div className="bg-gray-900 min-h-screen py-8 rounded-lg">
             <div className="max-w-screen-lg mx-auto px-4 relative z-10">
                 {scholarships.map((scholarship) => (
                     <div key={scholarship.id} className="relative">
