@@ -1,109 +1,98 @@
 import React, { useState } from 'react';
-import scholarships from './scholarships.json';
 
-const AddScholarship = () => {
-  const [form, setForm] = useState({
-    name: '',
-    description: '',
-    eligibility: '',
-    deadline: '',
-    link: ''
+const AddScholarship = ({ onAdd }) => {
+  const [formData, setFormData] = useState({
+    title: '',
+    location: '',
+    date: '',
+    amount: '',
+    rating: '',
+    reviews: '',
+    image: ''
   });
 
   const handleChange = (e) => {
-    setForm({
-      ...form,
+    setFormData({
+      ...formData,
       [e.target.name]: e.target.value
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updatedScholarships = [...scholarships, form];
-
-    // Simulate saving to JSON file
-    console.log('Updated Scholarships:', JSON.stringify(updatedScholarships, null, 2));
-
-    // Reset form
-    setForm({
-      name: '',
-      description: '',
-      eligibility: '',
-      deadline: '',
-      link: ''
+    onAdd(formData);
+    setFormData({
+      title: '',
+      location: '',
+      date: '',
+      amount: '',
+      rating: '',
+      reviews: '',
+      image: ''
     });
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-10">
-      <h2 className="text-2xl font-bold mb-6">Add a New Scholarship</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label htmlFor="name" className="block text-sm font-medium text-white">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            value={form.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="description" className="block text-sm font-medium text-white">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            value={form.description}
-            onChange={handleChange}
-            required
-          ></textarea>
-        </div>
-        <div className="mb-4">
-          <label htmlFor="eligibility" className="block text-sm font-medium text-white">Eligibility</label>
-          <textarea
-            id="eligibility"
-            name="eligibility"
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            value={form.eligibility}
-            onChange={handleChange}
-            required
-          ></textarea>
-        </div>
-        <div className="mb-4">
-          <label htmlFor="deadline" className="block text-sm font-medium text-white">Deadline</label>
-          <input
-            type="date"
-            id="deadline"
-            name="deadline"
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            value={form.deadline}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="link" className="block text-sm font-medium text-white">Link</label>
-          <input
-            type="url"
-            id="link"
-            name="link"
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            value={form.link}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-indigo-600 text-white p-2 rounded-md shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          Add Scholarship
-        </button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} className="bg-gray-800 p-4 rounded-lg mb-6">
+      <h2 className="text-xl text-white mb-4">Add Scholarship</h2>
+      <input
+        type="text"
+        name="title"
+        placeholder="Title"
+        value={formData.title}
+        onChange={handleChange}
+        className="mb-2 p-2 w-full bg-gray-700 text-white rounded"
+      />
+      <input
+        type="text"
+        name="location"
+        placeholder="Location"
+        value={formData.location}
+        onChange={handleChange}
+        className="mb-2 p-2 w-full bg-gray-700 text-white rounded"
+      />
+      <input
+        type="text"
+        name="date"
+        placeholder="Date"
+        value={formData.date}
+        onChange={handleChange}
+        className="mb-2 p-2 w-full bg-gray-700 text-white rounded"
+      />
+      <input
+        type="text"
+        name="amount"
+        placeholder="Amount"
+        value={formData.amount}
+        onChange={handleChange}
+        className="mb-2 p-2 w-full bg-gray-700 text-white rounded"
+      />
+      <input
+        type="number"
+        name="rating"
+        placeholder="Rating"
+        value={formData.rating}
+        onChange={handleChange}
+        className="mb-2 p-2 w-full bg-gray-700 text-white rounded"
+      />
+      <input
+        type="number"
+        name="reviews"
+        placeholder="Reviews"
+        value={formData.reviews}
+        onChange={handleChange}
+        className="mb-2 p-2 w-full bg-gray-700 text-white rounded"
+      />
+      <input
+        type="text"
+        name="image"
+        placeholder="Image URL"
+        value={formData.image}
+        onChange={handleChange}
+        className="mb-2 p-2 w-full bg-gray-700 text-white rounded"
+      />
+      <button type="submit" className="bg-blue-500 p-2 rounded text-white w-full">Add Scholarship</button>
+    </form>
   );
 };
 

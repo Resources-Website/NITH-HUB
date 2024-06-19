@@ -2,16 +2,37 @@ import React, { useState, useEffect } from 'react';
 import scholarshipsData from './scholarships.json';
 
 const Scholarship = () => {
-    const [scholarships, setScholarships] = useState([]);
+    const [scholarships, setScholarships] = useState(scholarshipsData);
+    const [searchTerm, setSearchTerm] = useState('');
 
-    useEffect(() => {
-        setScholarships(scholarshipsData);
-    }, []);
+    const addScholarship = (newScholarship) => {
+        setScholarships([...scholarships, { id: scholarships.length + 1, ...newScholarship }]);
+    };
+
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const filteredScholarships = scholarships.filter((scholarship) =>
+        scholarship.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        scholarship.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        scholarship.date.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        scholarship.amount.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <div className="bg-gray-900 min-h-screen rounded-lg p-4">
             <div className="max-w-screen-lg mx-auto">
-                {scholarships.map(scholarship => (
+                <div className="mb-4">
+                    <input
+                        type="text"
+                        placeholder="Search scholarships..."
+                        value={searchTerm}
+                        onChange={handleSearch}
+                        className="w-full p-2 rounded-lg bg-gray-800 text-white"
+                    />
+                </div>
+                {filteredScholarships.map((scholarship) => (
                     <div key={scholarship.id} className="bg-gray-800 text-white rounded-lg shadow-md p-6 mb-4 flex items-center space-x-4">
                         <img src={scholarship.image} alt={scholarship.title} className="w-16 h-16 rounded-full" />
                         <div className="flex-grow">
