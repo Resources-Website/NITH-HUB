@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import scholarshipsData from './scholarships.json';
+import debounce from 'lodash/debounce';
 
 const Scholarship = () => {
     const [scholarships, setScholarships] = useState(scholarshipsData);
@@ -10,9 +11,9 @@ const Scholarship = () => {
         setScholarships([...scholarships, { id: scholarships.length + 1, ...newScholarship }]);
     };
 
-    const handleSearch = (event) => {
+    const handleSearch = debounce((event) => {
         setSearchTerm(event.target.value);
-    };
+    }, 300);
 
     const handleCardClick = (scholarship) => {
         setSelectedScholarship(scholarship);
@@ -36,8 +37,7 @@ const Scholarship = () => {
                     <input
                         type="text"
                         placeholder="Search scholarships..."
-                        value={searchTerm}
-                        onChange={handleSearch}
+                        onChange={(e) => handleSearch(e)}
                         className="w-full p-2 rounded-lg bg-gray-800 text-white"
                     />
                 </div>
