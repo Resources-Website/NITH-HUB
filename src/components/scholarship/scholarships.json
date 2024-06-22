@@ -7,6 +7,8 @@
         "amount": "$100,000",
         "rating": 5,
         "reviews": 120,
+        "description": "A premier event showcasing the latest advancements in artificial intelligence, with keynotes from industry leaders and workshops on cutting-edge AI technologies. Attendees will have the opportunity to network with AI professionals, participate in hands-on sessions, and explore innovative applications of AI in various industries.",
+        "link": "https://example.com/global-ai-summit-2024",
         "image": "/nithlogo.png"
     },
     {
@@ -17,6 +19,8 @@
         "amount": "€80,000",
         "rating": 4,
         "reviews": 89,
+        "description": "Join the brightest minds in technology to explore innovative solutions and trends that are shaping the future of tech industries worldwide. The conference features keynote speeches, panel discussions, and workshops on emerging technologies, offering attendees a comprehensive view of the tech landscape and opportunities for collaboration.",
+        "link": "https://example.com/tech-innovators-conference-2024",
         "image": "/nithlogo.png"
     },
     {
@@ -27,6 +31,56 @@
         "amount": "₹500,000",
         "rating": 5,
         "reviews": 150,
+        "description": "A hackathon focused on solving healthcare challenges through technology, bringing together developers, designers, and healthcare professionals. Participants will work in teams to create innovative solutions that address real-world health issues, with mentorship from industry experts and the chance to win significant prizes.",
+        "link": "https://example.com/healthcare-hackathon-2024",
+        "image": "/nithlogo.png"
+    },
+    {
+        "id": 3,
+        "title": "Healthcare Hackathon 2024",
+        "location": "India",
+        "date": "20th March - 22nd March",
+        "amount": "₹500,000",
+        "rating": 5,
+        "reviews": 150,
+        "description": "A hackathon focused on solving healthcare challenges through technology, bringing together developers, designers, and healthcare professionals. Participants will work in teams to create innovative solutions that address real-world health issues, with mentorship from industry experts and the chance to win significant prizes.",
+        "link": "https://example.com/healthcare-hackathon-2024",
+        "image": "/nithlogo.png"
+    },
+    {
+        "id": 3,
+        "title": "Healthcare Hackathon 2024",
+        "location": "India",
+        "date": "20th March - 22nd March",
+        "amount": "₹500,000",
+        "rating": 5,
+        "reviews": 150,
+        "description": "A hackathon focused on solving healthcare challenges through technology, bringing together developers, designers, and healthcare professionals. Participants will work in teams to create innovative solutions that address real-world health issues, with mentorship from industry experts and the chance to win significant prizes.",
+        "link": "https://example.com/healthcare-hackathon-2024",
+        "image": "/nithlogo.png"
+    },
+    {
+        "id": 3,
+        "title": "Healthcare Hackathon 2024",
+        "location": "India",
+        "date": "20th March - 22nd March",
+        "amount": "₹500,000",
+        "rating": 5,
+        "reviews": 150,
+        "description": "A hackathon focused on solving healthcare challenges through technology, bringing together developers, designers, and healthcare professionals. Participants will work in teams to create innovative solutions that address real-world health issues, with mentorship from industry experts and the chance to win significant prizes.",
+        "link": "https://example.com/healthcare-hackathon-2024",
+        "image": "/nithlogo.png"
+    },
+    {
+        "id": 3,
+        "title": "Healthcare Hackathon 2024",
+        "location": "India",
+        "date": "20th March - 22nd March",
+        "amount": "₹500,000",
+        "rating": 5,
+        "reviews": 150,
+        "description": "A hackathon focused on solving healthcare challenges through technology, bringing together developers, designers, and healthcare professionals. Participants will work in teams to create innovative solutions that address real-world health issues, with mentorship from industry experts and the chance to win significant prizes.",
+        "link": "https://example.com/healthcare-hackathon-2024",
         "image": "/nithlogo.png"
     },
     {
@@ -37,66 +91,8 @@
         "amount": "$150,000",
         "rating": 4,
         "reviews": 75,
-        "image": "/nithlogo.png"
-    },
-    {
-        "id": 5,
-        "title": "Fintech Conference 2024",
-        "location": "UK",
-        "date": "10th May - 12th May",
-        "amount": "£120,000",
-        "rating": 5,
-        "reviews": 200,
-        "image": "/nithlogo.png"
-    },
-    {
-        "id": 6,
-        "title": "Education Reform Forum",
-        "location": "Australia",
-        "date": "22nd June - 25th June",
-        "amount": "AUD 90,000",
-        "rating": 3,
-        "reviews": 60,
-        "image": "/nithlogo.png"
-    },
-    {
-        "id": 7,
-        "title": "Agritech Expo",
-        "location": "Brazil",
-        "date": "15th July - 17th July",
-        "amount": "BRL 400,000",
-        "rating": 4,
-        "reviews": 110,
-        "image": "/nithlogo.png"
-    },
-    {
-        "id": 8,
-        "title": "Smart Cities Conference",
-        "location": "Singapore",
-        "date": "3rd August - 5th August",
-        "amount": "SGD 250,000",
-        "rating": 5,
-        "reviews": 140,
-        "image": "/nithlogo.png"
-    },
-    {
-        "id": 9,
-        "title": "Blockchain Summit 2024",
-        "location": "Switzerland",
-        "date": "18th September - 20th September",
-        "amount": "CHF 200,000",
-        "rating": 5,
-        "reviews": 190,
-        "image": "/nithlogo.png"
-    },
-    {
-        "id": 10,
-        "title": "Stanford Internship Programme",
-        "location": "USA",
-        "date": "1st November - 30th November",
-        "amount": "$50,000",
-        "rating": 3,
-        "reviews": 56,
+        "description": "Explore the latest advancements in green energy technologies and sustainability practices with experts from around the world. The summit will cover topics such as renewable energy sources, energy efficiency, and policy initiatives, providing a platform for knowledge sharing and networking among industry professionals.",
+        "link": "https://example.com/green-energy-summit-2024",
         "image": "/nithlogo.png"
     }
 ]
