@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../../firebase';
+import { signOut } from 'firebase/auth';
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -10,6 +13,11 @@ const Navbar = () => {
 
     const closeMobileMenu = () => {
         setIsMobileMenuOpen(false);
+    };
+
+    const handleSignOut = async () => {
+        await signOut(auth);
+        navigate('/signin');
     };
 
     return (
@@ -21,22 +29,30 @@ const Navbar = () => {
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white hidden md:inline">NITH-HUB</span>
                     </a>
                     <div className="flex md:order-2 space-x-3 rtl:space-x-reverse items-center">
-                        <input 
-                            type="text" 
-                            className="hidden md:block w-48 px-4 py-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                            placeholder="Search..." 
+                        <input
+                            type="text"
+                            className="hidden md:block w-48 px-4 py-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Search..."
                         />
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            onClick={() => navigate('/signin')}
                         >
                             Sign In
                         </button>
-                        <button 
-                            onClick={toggleMobileMenu} 
-                            type="button" 
-                            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" 
-                            aria-controls="navbar-cta" 
+                        <button
+                            type="button"
+                            className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                            onClick={handleSignOut}
+                        >
+                            Sign Out
+                        </button>
+                        <button
+                            onClick={toggleMobileMenu}
+                            type="button"
+                            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                            aria-controls="navbar-cta"
                             aria-expanded={isMobileMenuOpen}
                         >
                             <span className="sr-only">Open main menu</span>
@@ -68,9 +84,3 @@ const Navbar = () => {
 }
 
 export default Navbar;
-
-
-
-
-
-
