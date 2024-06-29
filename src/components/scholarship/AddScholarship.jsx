@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const AddScholarship = ({ onAdd }) => {
   const [formData, setFormData] = useState({
@@ -18,20 +19,18 @@ const AddScholarship = ({ onAdd }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onAdd(formData);
-    setFormData({
-      title: '',
-      location: '',
-      date: '',
-      amount: '',
-      rating: '',
-      reviews: '',
-      image: ''
-    });
+    try {
+      const response = await axios.post('http://localhost:8000/add-scholarship', formData);
+      console.log('Scholarship added successfully:', response.data);
+      // Optionally handle success feedback or redirect
+    } catch (error) {
+      console.error('Error adding scholarship:', error);
+      // Handle error feedback to the user
+    }
   };
-
+  
   return (
     <form onSubmit={handleSubmit} className="bg-gray-800 p-4 rounded-lg mb-6">
       <h2 className="text-xl text-white mb-4">Add Scholarship</h2>
