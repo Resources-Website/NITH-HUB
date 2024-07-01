@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
-import scholarshipsData from './scholarships.json';
+import React, { useState, useEffect } from 'react';
 import debounce from 'lodash/debounce';
 
 const Scholarship = () => {
-    const [scholarships, setScholarships] = useState(scholarshipsData);
+    const [scholarships, setScholarships] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedScholarship, setSelectedScholarship] = useState(null);
+
+    useEffect(() => {
+        fetch('http://localhost:8000/scholarships')
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log('Fetched scholarships:', data); // Log the fetched data
+                setScholarships(data);
+            })
+            .catch((error) => console.error('Error fetching scholarships:', error));
+    }, []);
 
     const addScholarship = (newScholarship) => {
         setScholarships([...scholarships, { id: scholarships.length + 1, ...newScholarship }]);
@@ -23,12 +37,14 @@ const Scholarship = () => {
         setSelectedScholarship(null);
     };
 
-    const filteredScholarships = scholarships.filter((scholarship) =>
-        scholarship.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        scholarship.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        scholarship.date.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        scholarship.amount.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredScholarships = scholarships.filter((scholarship) => {
+        return (
+            scholarship.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            scholarship.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            scholarship.date.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            scholarship.amount.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    });
 
     return (
         <div className="bg-gray-900 min-h-screen rounded-lg p-4">
@@ -41,25 +57,29 @@ const Scholarship = () => {
                         className="w-full p-2 rounded-lg bg-gray-800 text-white"
                     />
                 </div>
-                {filteredScholarships.map((scholarship) => (
-                    <div
-                        key={scholarship.id}
-                        className="bg-gray-800 text-white rounded-lg shadow-md p-6 mb-4 flex items-center space-x-4 cursor-pointer"
-                        onClick={() => handleCardClick(scholarship)}
-                    >
-                        <img src={scholarship.image} alt={scholarship.title} className="w-16 h-16 rounded-full" />
-                        <div className="flex-grow">
-                            <h3 className="text-xl font-semibold">{scholarship.title}</h3>
-                            <p className="text-gray-400">{scholarship.location}</p>
-                            <p className="text-gray-400">{scholarship.date}</p>
-                            <p className="text-gray-400">{scholarship.amount}</p>
-                            <div className="flex items-center space-x-2 mt-2">
-                                <span className="text-yellow-400">{"⭐".repeat(scholarship.rating)}</span>
-                                <span className="text-gray-400">{scholarship.reviews} reviews</span>
+                {filteredScholarships.length === 0 ? (
+                    <p className="text-white">No scholarships found.</p>
+                ) : (
+                    filteredScholarships.map((scholarship) => (
+                        <div
+                            key={scholarship._id} // Use _id from MongoDB
+                            className="bg-gray-800 text-white rounded-lg shadow-md p-6 mb-4 flex items-center space-x-4 cursor-pointer"
+                            onClick={() => handleCardClick(scholarship)}
+                        >
+                            <img src={scholarship.image} alt={scholarship.title} className="w-16 h-16 rounded-full" />
+                            <div className="flex-grow">
+                                <h3 className="text-xl font-semibold">{scholarship.title}</h3>
+                                <p className="text-gray-400">{scholarship.location}</p>
+                                <p className="text-gray-400">{scholarship.date}</p>
+                                <p className="text-gray-400">{scholarship.amount}</p>
+                                <div className="flex items-center space-x-2 mt-2">
+                                    <span className="text-yellow-400">{"⭐".repeat(scholarship.rating)}</span>
+                                    <span className="text-gray-400">{scholarship.reviews} reviews</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                )}
                 {selectedScholarship && (
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                         <div className="bg-gray-800 text-white rounded-lg shadow-md p-6 w-full max-w-lg relative">
