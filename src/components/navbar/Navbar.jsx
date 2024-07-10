@@ -1,11 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { signOut } from 'firebase/auth';
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [photoURL, setPhotoURL] = useState(null);
+    const [userInfo, setUserInfo] = useState({ name: '', email: '' }); // Add userInfo state
+    const [isPopupOpen, setIsPopupOpen] = useState(false); // Add popup visibility state
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setPhotoURL(user.photoURL);
+                setUserInfo({ name: user.displayName, email: user.email });
+            } else {
+                setPhotoURL(null);
+                setUserInfo({ name: '', email: '' });
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -18,6 +35,10 @@ const Navbar = () => {
     const handleSignOut = async () => {
         await signOut(auth);
         navigate('/signin');
+    };
+
+    const togglePopup = () => {
+        setIsPopupOpen(!isPopupOpen);
     };
 
     return (
@@ -34,13 +55,30 @@ const Navbar = () => {
                             className="hidden md:block w-48 px-4 py-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Search..."
                         />
-                        <button
-                            type="button"
-                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                            onClick={() => navigate('/signin')}
-                        >
-                            Sign In
-                        </button>
+                        {photoURL ? (
+                            <div className="relative">
+                                <img
+                                    src={photoURL}
+                                    alt="User Profile"
+                                    className="w-8 h-8 rounded-full cursor-pointer"
+                                    onClick={togglePopup}
+                                />
+                                {isPopupOpen && (
+                                    <div className="absolute right-0 mt-2 w-52 bg-slate-700 border border-gray-200 rounded-lg shadow-lg p-4">
+                                        <div className="text-gray-200 font-semibold">{userInfo.name}</div>
+                                        <div className="text-gray-200">{userInfo.email}</div>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <button
+                                type="button"
+                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                onClick={() => navigate('/signin')}
+                            >
+                                Sign In
+                            </button>
+                        )}
                         <button
                             type="button"
                             className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
