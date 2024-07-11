@@ -12,6 +12,10 @@ const AddScholarship = ({ onAdd }) => {
     image: ''
   });
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,19 +25,51 @@ const AddScholarship = ({ onAdd }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:8000/add-scholarship', formData);
-      console.log('Scholarship added successfully:', response.data);
-      // Optionally handle success feedback or redirect
-    } catch (error) {
-      console.error('Error adding scholarship:', error);
-      // Handle error feedback to the user
+    setLoading(true);
+    setError('');
+    setSuccess('');
+
+    // Basic validation
+    for (let key in formData) {
+      if (formData[key] === '') {
+        setError('All fields are required.');
+        setLoading(false);
+        return;
+      }
     }
-  };
+    try {
+        const response = await axios.post('http://localhost:8000/add-scholarship', formData);
+        console.log('Scholarship added successfully:', response.data);
+        setSuccess('Scholarship added successfully!');
+        setLoading(false);
+  
+        // Clear form
+        setFormData({
+          title: '',
+          location: '',
+          date: '',
+          amount: '',
+          rating: '',
+          reviews: '',
+          image: ''
+        });
+  
+        if (onAdd) {
+          onAdd(response.data);
+        }
+      } catch (error) {
+        console.error('Error adding scholarship:', error);
+        setError('Failed to add scholarship.');
+        setLoading(false);
+      }
+    };
+  
   
   return (
     <form onSubmit={handleSubmit} className="bg-gray-800 p-4 rounded-lg mb-6">
       <h2 className="text-xl text-white mb-4">Add Scholarship</h2>
+      {error && <div className="bg-red-500 text-white p-2 mb-4 rounded">{error}</div>}
+      {success && <div className="bg-green-500 text-white p-2 mb-4 rounded">{success}</div>}
       <input
         type="text"
         name="title"

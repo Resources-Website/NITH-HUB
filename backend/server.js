@@ -6,12 +6,13 @@ import Scholarship from './models/Scholarship.js'; // Ensure you have this model
 
 const app = express();
 
-const username = '22bph040';
-const password = 'eb8APetEwYQUR8V4';
+const username = '23bph042';
+const password = '1a2s3d4f5g';
 const clusterUrl = `mongodb+srv://${username}:${password}@cluster0.o4y2lbm.mongodb.net`;
 const dbName = 'Scholarships';
 
-const uri = `${clusterUrl}/${dbName}?retryWrites=true&w=majority&appName=search-test`;
+const uri = `mongodb+srv://23bph042:1a2s3d4f5g@23bph042.pai7trx.mongodb.net/?retryWrites=true&w=majority&appName=23bph042
+`;
 
 mongoose.connect(uri)
     .then(() => console.log('Connected to MongoDB Atlas'))
@@ -37,7 +38,7 @@ app.get('/scholarships', async (req, res) => {
     }
 });
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8002;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
