@@ -6,7 +6,7 @@ import AddScholarship from './AddScholarship'; // Ensure you import the AddSchol
 const Scholarship = () => {
     const [scholarships, setScholarships] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedScholarship, setSelectedScholarship] = useState(null);
+    const [selectedScholarshipIndex, setSelectedScholarshipIndex] = useState(null);
 
     useEffect(() => {
         fetch('http://localhost:8000/scholarships')
@@ -31,12 +31,20 @@ const Scholarship = () => {
         setSearchTerm(event.target.value);
     }, 300);
 
-    const handleCardClick = (scholarship) => {
-        setSelectedScholarship(scholarship);
+    const handleCardClick = (index) => {
+        setSelectedScholarshipIndex(index);
     };
 
     const handleCloseModal = () => {
-        setSelectedScholarship(null);
+        setSelectedScholarshipIndex(null);
+    };
+
+    const handlePrevious = () => {
+        setSelectedScholarshipIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : scholarships.length - 1));
+    };
+
+    const handleNext = () => {
+        setSelectedScholarshipIndex((prevIndex) => (prevIndex < scholarships.length - 1 ? prevIndex + 1 : 0));
     };
 
     const filteredScholarships = scholarships.filter((scholarship) => {
@@ -62,11 +70,11 @@ const Scholarship = () => {
                 {filteredScholarships.length === 0 ? (
                     <p className="text-white">No scholarships found.</p>
                 ) : (
-                    filteredScholarships.map((scholarship) => (
+                    filteredScholarships.map((scholarship, index) => (
                         <div
                             key={scholarship._id} // Use _id from MongoDB
                             className="bg-gray-800 text-white rounded-lg shadow-md p-6 mb-4 flex items-center space-x-4 cursor-pointer"
-                            onClick={() => handleCardClick(scholarship)}
+                            onClick={() => handleCardClick(index)}
                         >
                             <img src={scholarship.image} alt={scholarship.title} className="w-16 h-16 rounded-full" />
                             <div className="flex-grow">
@@ -82,24 +90,24 @@ const Scholarship = () => {
                         </div>
                     ))
                 )}
-                {selectedScholarship && (
+                {selectedScholarshipIndex !== null && (
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                         <div className="bg-gray-800 text-white rounded-lg shadow-md p-6 w-full max-w-lg relative">
                             <button onClick={handleCloseModal} className="absolute top-2 right-2 text-gray-400 hover:text-white">
                                 &times;
                             </button>
-                            <h3 className="text-2xl font-semibold mb-4">{selectedScholarship.title}</h3>
-                            <img src={selectedScholarship.image} alt={selectedScholarship.title} className="w-32 h-32 rounded-full mx-auto mb-4" />
-                            <p className="text-gray-400 mb-2"><strong>Location:</strong> {selectedScholarship.location}</p>
-                            <p className="text-gray-400 mb-2"><strong>Date:</strong> {selectedScholarship.date}</p>
-                            <p className="text-gray-400 mb-2"><strong>Amount:</strong> {selectedScholarship.amount}</p>
+                            <h3 className="text-2xl font-semibold mb-4">{scholarships[selectedScholarshipIndex].title}</h3>
+                            <img src={scholarships[selectedScholarshipIndex].image} alt={scholarships[selectedScholarshipIndex].title} className="w-32 h-32 rounded-full mx-auto mb-4" />
+                            <p className="text-gray-400 mb-2"><strong>Location:</strong> {scholarships[selectedScholarshipIndex].location}</p>
+                            <p className="text-gray-400 mb-2"><strong>Date:</strong> {scholarships[selectedScholarshipIndex].date}</p>
+                            <p className="text-gray-400 mb-2"><strong>Amount:</strong> {scholarships[selectedScholarshipIndex].amount}</p>
                             <div className="flex items-center space-x-2 mb-4">
-                                <span className="text-yellow-400">{"⭐".repeat(selectedScholarship.rating)}</span>
-                                <span className="text-gray-400">{selectedScholarship.reviews} reviews</span>
+                                <span className="text-yellow-400">{"⭐".repeat(scholarships[selectedScholarshipIndex].rating)}</span>
+                                <span className="text-gray-400">{scholarships[selectedScholarshipIndex].reviews} reviews</span>
                             </div>
-                            <p className="text-gray-400 mb-4">{selectedScholarship.description}</p>
+                            <p className="text-gray-400 mb-4">{scholarships[selectedScholarshipIndex].description}</p>
                             <a
-                                href={selectedScholarship.link}
+                                href={scholarships[selectedScholarshipIndex].link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-blue-400 underline"
@@ -111,6 +119,20 @@ const Scholarship = () => {
                                     Apply Now
                                 </button>
                             </a>
+                            <div className="flex justify-between mt-4">
+                                <button
+                                    onClick={handlePrevious}
+                                    className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                                >
+                                    Previous
+                                </button>
+                                <button
+                                    onClick={handleNext}
+                                    className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                                >
+                                    Next
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}
