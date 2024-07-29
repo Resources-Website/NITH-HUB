@@ -50,11 +50,7 @@ const Navbar = () => {
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white hidden md:inline">NITH-HUB</span>
                     </a>
                     <div className="flex md:order-2 space-x-3 rtl:space-x-reverse items-center">
-                        <input
-                            type="text"
-                            className="hidden md:block w-48 px-4 py-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Search..."
-                        />
+
                         {photoURL ? (
                             <div className="relative">
                                 <img
