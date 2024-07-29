@@ -20,11 +20,16 @@ mongoose.connect(uri)
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/add-scholarship', (req, res) => {
-    // Handle the POST request logic here
-    // For example, save data to MongoDB
-    console.log('Received POST request at /add-scholarship');
-    res.send('POST request received successfully');
+app.post('/add-scholarship', async(req, res) => {
+    try {
+        const newScholarship = new Scholarship(req.body);
+        await newScholarship.save();
+        console.log('Scholarship added successfully:', newScholarship);
+        res.status(201).send('Scholarship added successfully');
+    } catch (error) {
+        console.error('Error adding scholarship:', error);
+        res.status(400).send('Error adding scholarship');
+    }
 });
 
 // New route to fetch scholarships
@@ -33,6 +38,7 @@ app.get('/scholarships', async (req, res) => {
         const scholarships = await Scholarship.find();
         res.json(scholarships);
     } catch (error) {
+        console.error('Error fetching scholarships:', error);
         res.status(500).json({ message: error.message });
     }
 });

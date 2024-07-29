@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import debounce from 'lodash/debounce';
+import AddScholarship from './AddScholarship'; // Ensure you import the AddScholarship component
+
 
 const Scholarship = () => {
     const [scholarships, setScholarships] = useState([]);
@@ -22,7 +24,7 @@ const Scholarship = () => {
     }, []);
 
     const addScholarship = (newScholarship) => {
-        setScholarships([...scholarships, { id: scholarships.length + 1, ...newScholarship }]);
+        setScholarships([...scholarships, newScholarship ]);
     };
 
     const handleSearch = debounce((event) => {
