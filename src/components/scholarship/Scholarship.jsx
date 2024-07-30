@@ -79,13 +79,11 @@ const Scholarship = () => {
                             <img src={scholarship.image} alt={scholarship.title} className="w-16 h-16 rounded-full" />
                             <div className="flex-grow">
                                 <h3 className="text-xl font-semibold">{scholarship.title}</h3>
-                                <p className="text-gray-400">{scholarship.location}</p>
-                                <p className="text-gray-400">{scholarship.date}</p>
-                                <p className="text-gray-400">{scholarship.amount}</p>
-                                <div className="flex items-center space-x-2 mt-2">
-                                    <span className="text-yellow-400">{"⭐".repeat(scholarship.rating)}</span>
-                                    <span className="text-gray-400">{scholarship.reviews} reviews</span>
-                                </div>
+                                <p className="text-gray-400">Eligibility: {scholarship.eligibility}</p>
+                                <p className="text-gray-400">Location: {scholarship.location}</p>
+                                <p className="text-gray-400">Amount: {scholarship.amount}</p>
+                                
+                                <p className="text-gray-400">Funding Type: {scholarship.fundingType}</p>
                             </div>
                         </div>
                     ))
@@ -100,12 +98,14 @@ const Scholarship = () => {
                             <img src={scholarships[selectedScholarshipIndex].image} alt={scholarships[selectedScholarshipIndex].title} className="w-32 h-32 rounded-full mx-auto mb-4" />
                             <p className="text-gray-400 mb-2"><strong>Location:</strong> {scholarships[selectedScholarshipIndex].location}</p>
                             <p className="text-gray-400 mb-2"><strong>Date:</strong> {scholarships[selectedScholarshipIndex].date}</p>
+                            <p className="text-gray-400 mb-2"><strong>Duration:</strong> {scholarships[selectedScholarshipIndex].duration}</p>
                             <p className="text-gray-400 mb-2"><strong>Amount:</strong> {scholarships[selectedScholarshipIndex].amount}</p>
-                            <div className="flex items-center space-x-2 mb-4">
-                                <span className="text-yellow-400">{"⭐".repeat(scholarships[selectedScholarshipIndex].rating)}</span>
-                                <span className="text-gray-400">{scholarships[selectedScholarshipIndex].reviews} reviews</span>
-                            </div>
-                            <p className="text-gray-400 mb-4">{scholarships[selectedScholarshipIndex].description}</p>
+                            <p className="text-gray-400 mb-2"><strong>Eligibility:</strong> {scholarships[selectedScholarshipIndex].eligibility}</p>
+                            <p className="text-gray-400 mb-2"><strong>Funding Type:</strong> {scholarships[selectedScholarshipIndex].fundingType}</p>
+                            <p className="text-gray-400 mb-4"><strong>Description: </strong>{scholarships[selectedScholarshipIndex].description}</p>
+                             
+
+  
                             <a
                                 href={scholarships[selectedScholarshipIndex].link}
                                 target="_blank"

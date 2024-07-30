@@ -52,7 +52,8 @@ const AddScholarship = ({ onAdd }) => {
           rating: '',
           reviews: '',
           image: ''
-        });
+        }
+      );
   
         if (onAdd) {
           onAdd(response.data);
