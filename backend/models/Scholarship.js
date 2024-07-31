@@ -4,12 +4,13 @@ const scholarshipSchema = new mongoose.Schema({
   title: String,
   location: String,
   date: String,
-  amount: String,
-  rating: Number,
-  reviews: Number,
-  image: String,
+  duration: String,
   description: String,
-  link: String,
+  amount: String,
+  image: String,
+  scholarship: String,
+  fundingtype: String,
+  eligibilty: String
 });
 
 export default mongoose.model('Scholarship', scholarshipSchema);
