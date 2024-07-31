@@ -51,8 +51,8 @@ const SignIn = () => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+        <div className="flex justify-center items-center min-h-screen bg-gray-10">
+            <div className="bg-gray-800 p-6 rounded-lg shadow-lg mb-6 max-w-md mx-auto">
                 <h2 className="text-2xl font-semibold mb-6">Sign In</h2>
                 <button
                     onClick={signInWithGoogle}
