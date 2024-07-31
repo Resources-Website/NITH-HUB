@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import debounce from 'lodash/debounce';
-import AddScholarship from './AddScholarship';
-import { GrCaretPrevious, GrCaretNext } from "react-icons/gr";
+import AddScholarship from './AddScholarship'; // Ensure you import the AddScholarship component
+
 
 const Scholarship = () => {
     const [scholarships, setScholarships] = useState([]);
@@ -24,7 +24,7 @@ const Scholarship = () => {
     }, []);
 
     const addScholarship = (newScholarship) => {
-        setScholarships([...scholarships, newScholarship]);
+        setScholarships([...scholarships, newScholarship ]);
     };
 
     const handleSearch = debounce((event) => {
@@ -45,12 +45,6 @@ const Scholarship = () => {
 
     const handleNext = () => {
         setSelectedScholarshipIndex((prevIndex) => (prevIndex < scholarships.length - 1 ? prevIndex + 1 : 0));
-    };
-
-    const handleModalClick = (e) => {
-        if (e.target === e.currentTarget) {
-            handleCloseModal();
-        }
     };
 
     const filteredScholarships = scholarships.filter((scholarship) => {
@@ -97,17 +91,8 @@ const Scholarship = () => {
                     ))
                 )}
                 {selectedScholarshipIndex !== null && (
-                    <div
-                        className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
-                        onClick={handleModalClick}
-                    >
-                        <button
-                            onClick={handlePrevious}
-                            className="absolute left-60 top-1/2 transform -translate-y-1/2 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-                        >
-                            <GrCaretPrevious />
-                        </button>
-                        <div className="relative bg-gray-800 text-white rounded-lg shadow-md p-6 w-full max-w-lg">
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div className="bg-gray-800 text-white rounded-lg shadow-md p-6 w-full max-w-lg relative">
                             <button onClick={handleCloseModal} className="absolute top-2 right-2 text-gray-400 hover:text-white">
                                 &times;
                             </button>
@@ -134,13 +119,21 @@ const Scholarship = () => {
                                     Apply Now
                                 </button>
                             </a>
+                            <div className="flex justify-between mt-4">
+                                <button
+                                    onClick={handlePrevious}
+                                    className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                                >
+                                    Previous
+                                </button>
+                                <button
+                                    onClick={handleNext}
+                                    className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                                >
+                                    Next
+                                </button>
+                            </div>
                         </div>
-                        <button
-                            onClick={handleNext}
-                            className="absolute right-60 top-1/2 transform -translate-y-1/2 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-                        >
-                            <GrCaretNext />
-                        </button>
                     </div>
                 )}
             </div>
