@@ -79,7 +79,7 @@ const Scholarship = () => {
                             <img src={scholarship.image} alt={scholarship.title} className="w-16 h-16 rounded-full" />
                             <div className="flex-grow">
                                 <h3 className="text-xl font-semibold">{scholarship.title}</h3>
-                                <p className="text-gray-400">Eligibility: {scholarship.eligibility}</p>
+                                <p className="text-gray-400">Eligibilty: {scholarship.eligibilty}</p>
                                 <p className="text-gray-400">Location: {scholarship.location}</p>
                                 <p className="text-gray-400">Amount: {scholarship.amount}</p>
                                 
@@ -100,7 +100,7 @@ const Scholarship = () => {
                             <p className="text-gray-400 mb-2"><strong>Date:</strong> {scholarships[selectedScholarshipIndex].date}</p>
                             <p className="text-gray-400 mb-2"><strong>Duration:</strong> {scholarships[selectedScholarshipIndex].duration}</p>
                             <p className="text-gray-400 mb-2"><strong>Amount:</strong> {scholarships[selectedScholarshipIndex].amount}</p>
-                            <p className="text-gray-400 mb-2"><strong>Eligibility:</strong> {scholarships[selectedScholarshipIndex].eligibility}</p>
+                            <p className="text-gray-400 mb-2"><strong>Eligibilty:</strong> {scholarships[selectedScholarshipIndex].eligibilty}</p>
                             <p className="text-gray-400 mb-2"><strong>Funding Type:</strong> {scholarships[selectedScholarshipIndex].fundingType}</p>
                             <p className="text-gray-400 mb-4"><strong>Description: </strong>{scholarships[selectedScholarshipIndex].description}</p>
                              

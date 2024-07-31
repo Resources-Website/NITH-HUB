@@ -6,10 +6,13 @@ const AddScholarship = ({ onAdd }) => {
     title: '',
     location: '',
     date: '',
+    duration: '',
+    description: '',
     amount: '',
-    rating: '',
-    reviews: '',
-    image: ''
+    image: '',
+    scholarship: '',
+    eligibilty: '',
+    fundingType: ''
   });
 
   const [loading, setLoading] = useState(false);
@@ -28,6 +31,8 @@ const AddScholarship = ({ onAdd }) => {
     setLoading(true);
     setError('');
     setSuccess('');
+    console.log("Form Data:", formData);
+
 
     // Basic validation
     for (let key in formData) {
@@ -48,10 +53,13 @@ const AddScholarship = ({ onAdd }) => {
           title: '',
           location: '',
           date: '',
+          duration: '',
+          description: '',
           amount: '',
-          rating: '',
-          reviews: '',
-          image: ''
+          image: '',
+          scholarship: '',
+          eligibilty: '',
+          fundingType: ''
         });
   
         if (onAdd) {
@@ -145,9 +153,9 @@ const AddScholarship = ({ onAdd }) => {
   />
   <input
     type="text"
-    name="fundingType"
-    placeholder="Funding Type"
-    value={formData.fundingType}
+    name="eligibilty"
+    placeholder="Eligibilty"
+    value={formData.eligibilty}
     onChange={handleChange}
     className="mb-3 p-3 w-full bg-gray-700 text-white rounded shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
   />
