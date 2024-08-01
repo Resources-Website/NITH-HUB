@@ -45,7 +45,7 @@ const Navbar = () => {
         <div id="Navbar">
             <nav className="bg-white border-gray-200 dark:bg-gray-900 fixed top-0 left-0 w-full z-50">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                    <a href="#Community" className="flex items-center space-x-3 rtl:space-x-reverse">
+                    <a href="scholarship" className="flex items-center space-x-3 rtl:space-x-reverse">
                         <img src="/nithlogo.png" className="h-12" alt="NITH-HUB" />
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white hidden md:inline">NITH-HUB</span>
                     </a>
