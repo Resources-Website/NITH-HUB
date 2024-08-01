@@ -77,7 +77,7 @@ const Scholarship = () => {
                             className="bg-gray-800 text-white rounded-lg shadow-md p-6 mb-4 flex items-center space-x-4 cursor-pointer"
                             onClick={() => handleCardClick(index)}
                         >
-                            <img src={scholarship.image} alt={scholarship.title} className="w-16 h-16 rounded-full" />
+                            <img src={scholarship.image} alt={scholarship.title} className="w-20 h-auto shadow-md" />
                             <div className="flex-grow">
                                 <h3 className="text-xl font-semibold">{scholarship.title}</h3>
                                 <p className="text-gray-400">Eligibility: {scholarship.eligibility}</p>
@@ -101,7 +101,7 @@ const Scholarship = () => {
                                 &times;
                             </button>
                             <h3 className="text-2xl font-semibold mb-4">{scholarships[selectedScholarshipIndex].title}</h3>
-                            <img src={scholarships[selectedScholarshipIndex].image} alt={scholarships[selectedScholarshipIndex].title} className="w-32 h-32 rounded-full mx-auto mb-4" />
+                            <img src={scholarships[selectedScholarshipIndex].image} alt={scholarships[selectedScholarshipIndex].title} className="w-32 h-auto mx-auto mb-4 shadow-md" />
                             <p className="text-gray-400 mb-2"><strong>Location:</strong> {scholarships[selectedScholarshipIndex].location}</p>
                             <p className="text-gray-400 mb-2"><strong>Date:</strong> {scholarships[selectedScholarshipIndex].date}</p>
                             <p className="text-gray-400 mb-2"><strong>Duration:</strong> {scholarships[selectedScholarshipIndex].duration}</p>
