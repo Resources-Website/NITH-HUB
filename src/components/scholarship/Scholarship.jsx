@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import debounce from 'lodash/debounce';
 import AddScholarship from './AddScholarship';
 import { GrCaretPrevious, GrCaretNext } from "react-icons/gr";
+import { GoAlert } from "react-icons/go";
+import ReportIssueForm from "../report/Report";
 
 const Scholarship = () => {
     const [scholarships, setScholarships] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedScholarship, setSelectedScholarship] = useState(null);
+    const [reportScholarship, setReportScholarship] = useState(null);
 
     useEffect(() => {
         fetch('http://localhost:8000/scholarships')
@@ -51,6 +54,14 @@ const Scholarship = () => {
         setSelectedScholarship(scholarships[nextIndex]);
     };
 
+    const handleAlertClick = (scholarship) => {
+        setReportScholarship(scholarship);
+    };
+
+    const handleCloseReport = () => {
+        setReportScholarship(null);
+    };
+
     const filteredScholarships = scholarships.filter((scholarship) => {
         return (
             scholarship.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -77,7 +88,7 @@ const Scholarship = () => {
                     filteredScholarships.map((scholarship) => (
                         <div
                             key={scholarship._id} // Use _id from MongoDB
-                            className="bg-gray-800 text-white rounded-lg shadow-md p-6 mb-4 flex items-center space-x-4 cursor-pointer"
+                            className="bg-gray-800 text-white rounded-lg shadow-md p-6 mb-4 flex items-center space-x-4 cursor-pointer relative"
                             onClick={() => handleCardClick(scholarship)}
                         >
                             <img src={scholarship.image} alt={scholarship.title} className="w-16 h-16 rounded-full" />
@@ -87,6 +98,9 @@ const Scholarship = () => {
                                 <p className="text-gray-400">Location: {scholarship.location}</p>
                                 <p className="text-gray-400">Amount: {scholarship.amount}</p>
                                 <p className="text-gray-400">Funding Type: {scholarship.fundingType}</p>
+                            </div>
+                            <div className="absolute bottom-6 right-6" onClick={(e) => { e.stopPropagation(); handleAlertClick(scholarship); }}>
+                                <GoAlert />
                             </div>
                         </div>
                     ))
@@ -133,6 +147,9 @@ const Scholarship = () => {
                             <GrCaretNext />
                         </button>
                     </div>
+                )}
+                {reportScholarship && (
+                    <ReportIssueForm scholarship={reportScholarship} onClose={handleCloseReport} />
                 )}
             </div>
         </div>
