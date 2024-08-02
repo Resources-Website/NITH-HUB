@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import debounce from 'lodash/debounce';
-import AddScholarship from './AddScholarship'; // Ensure you import the AddScholarship component
+import AddScholarship from './AddScholarship';
+import { GrCaretPrevious, GrCaretNext } from "react-icons/gr";
 
 
 const Scholarship = () => {
@@ -24,7 +25,7 @@ const Scholarship = () => {
     }, []);
 
     const addScholarship = (newScholarship) => {
-        setScholarships([...scholarships, newScholarship ]);
+        setScholarships([...scholarships, newScholarship]);
     };
 
     const handleSearch = debounce((event) => {
@@ -79,17 +80,22 @@ const Scholarship = () => {
                             <img src={scholarship.image} alt={scholarship.title} className="w-20 h-auto shadow-md" />
                             <div className="flex-grow">
                                 <h3 className="text-xl font-semibold">{scholarship.title}</h3>
-                                <p className="text-gray-400">Eligibilty: {scholarship.eligibilty}</p>
+                                <p className="text-gray-400">Eligibility: {scholarship.eligibility}</p>
                                 <p className="text-gray-400">Location: {scholarship.location}</p>
                                 <p className="text-gray-400">Amount: {scholarship.amount}</p>
-                                
                                 <p className="text-gray-400">Funding Type: {scholarship.fundingType}</p>
                             </div>
                         </div>
                     ))
                 )}
                 {selectedScholarshipIndex !== null && (
-                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+                        <button
+                            onClick={handlePrevious}
+                            className="absolute left-64 top-1/2 transform -translate-y-1/2 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                        >
+                            <GrCaretPrevious />
+                        </button>
                         <div className="bg-gray-800 text-white rounded-lg shadow-md p-6 w-full max-w-lg relative">
                             <button onClick={handleCloseModal} className="absolute top-2 right-2 text-gray-400 hover:text-white">
                                 &times;
@@ -100,12 +106,9 @@ const Scholarship = () => {
                             <p className="text-gray-400 mb-2"><strong>Date:</strong> {scholarships[selectedScholarshipIndex].date}</p>
                             <p className="text-gray-400 mb-2"><strong>Duration:</strong> {scholarships[selectedScholarshipIndex].duration}</p>
                             <p className="text-gray-400 mb-2"><strong>Amount:</strong> {scholarships[selectedScholarshipIndex].amount}</p>
-                            <p className="text-gray-400 mb-2"><strong>Eligibilty:</strong> {scholarships[selectedScholarshipIndex].eligibilty}</p>
+                            <p className="text-gray-400 mb-2"><strong>Eligibility:</strong> {scholarships[selectedScholarshipIndex].eligibility}</p>
                             <p className="text-gray-400 mb-2"><strong>Funding Type:</strong> {scholarships[selectedScholarshipIndex].fundingType}</p>
                             <p className="text-gray-400 mb-4"><strong>Description: </strong>{scholarships[selectedScholarshipIndex].description}</p>
-                             
-
-  
                             <a
                                 href={scholarships[selectedScholarshipIndex].link}
                                 target="_blank"
@@ -119,21 +122,13 @@ const Scholarship = () => {
                                     Apply Now
                                 </button>
                             </a>
-                            <div className="flex justify-between mt-4">
-                                <button
-                                    onClick={handlePrevious}
-                                    className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-                                >
-                                    Previous
-                                </button>
-                                <button
-                                    onClick={handleNext}
-                                    className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-                                >
-                                    Next
-                                </button>
-                            </div>
                         </div>
+                        <button
+                            onClick={handleNext}
+                            className="absolute right-64 top-1/2 transform -translate-y-1/2 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                        >
+                            <GrCaretNext />
+                        </button>
                     </div>
                 )}
             </div>
