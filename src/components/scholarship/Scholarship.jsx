@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import debounce from 'lodash/debounce';
-import AddScholarship from './AddScholarship'; // Ensure you import the AddScholarship component
-
+import AddScholarship from './AddScholarship';
+import { GrCaretPrevious, GrCaretNext } from "react-icons/gr";
 
 const Scholarship = () => {
     const [scholarships, setScholarships] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedScholarshipIndex, setSelectedScholarshipIndex] = useState(null);
+    const [selectedScholarship, setSelectedScholarship] = useState(null);
 
     useEffect(() => {
         fetch('http://localhost:8000/scholarships')
@@ -24,27 +24,31 @@ const Scholarship = () => {
     }, []);
 
     const addScholarship = (newScholarship) => {
-        setScholarships([...scholarships, newScholarship ]);
+        setScholarships([...scholarships, newScholarship]);
     };
 
     const handleSearch = debounce((event) => {
         setSearchTerm(event.target.value);
     }, 300);
 
-    const handleCardClick = (index) => {
-        setSelectedScholarshipIndex(index);
+    const handleCardClick = (scholarship) => {
+        setSelectedScholarship(scholarship);
     };
 
     const handleCloseModal = () => {
-        setSelectedScholarshipIndex(null);
+        setSelectedScholarship(null);
     };
 
     const handlePrevious = () => {
-        setSelectedScholarshipIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : scholarships.length - 1));
+        const currentIndex = scholarships.findIndex(s => s._id === selectedScholarship._id);
+        const prevIndex = (currentIndex > 0 ? currentIndex - 1 : scholarships.length - 1);
+        setSelectedScholarship(scholarships[prevIndex]);
     };
 
     const handleNext = () => {
-        setSelectedScholarshipIndex((prevIndex) => (prevIndex < scholarships.length - 1 ? prevIndex + 1 : 0));
+        const currentIndex = scholarships.findIndex(s => s._id === selectedScholarship._id);
+        const nextIndex = (currentIndex < scholarships.length - 1 ? currentIndex + 1 : 0);
+        setSelectedScholarship(scholarships[nextIndex]);
     };
 
     const filteredScholarships = scholarships.filter((scholarship) => {
@@ -70,44 +74,40 @@ const Scholarship = () => {
                 {filteredScholarships.length === 0 ? (
                     <p className="text-white">No scholarships found.</p>
                 ) : (
-                    filteredScholarships.map((scholarship, index) => (
+                    filteredScholarships.map((scholarship) => (
                         <div
                             key={scholarship._id} // Use _id from MongoDB
                             className="bg-gray-800 text-white rounded-lg shadow-md p-6 mb-4 flex items-center space-x-4 cursor-pointer"
-                            onClick={() => handleCardClick(index)}
+                            onClick={() => handleCardClick(scholarship)}
                         >
-                            <img src={scholarship.image} alt={scholarship.title} className="w-20 h-auto shadow-md" />
+                            <img src={scholarship.image} alt={scholarship.title} className="w-16 h-16 rounded-full" />
                             <div className="flex-grow">
                                 <h3 className="text-xl font-semibold">{scholarship.title}</h3>
-                                <p className="text-gray-400">Eligibilty: {scholarship.eligibilty}</p>
+                                <p className="text-gray-400">Eligibility: {scholarship.eligibility}</p>
                                 <p className="text-gray-400">Location: {scholarship.location}</p>
                                 <p className="text-gray-400">Amount: {scholarship.amount}</p>
-                                
                                 <p className="text-gray-400">Funding Type: {scholarship.fundingType}</p>
                             </div>
                         </div>
                     ))
                 )}
-                {selectedScholarshipIndex !== null && (
-                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                {selectedScholarship && (
+                    <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+                        <button onClick={handleCloseModal} className="absolute top-4 right-4 text-gray-50 hover:text-white z-50">
+                            &times;
+                        </button>
                         <div className="bg-gray-800 text-white rounded-lg shadow-md p-6 w-full max-w-lg relative">
-                            <button onClick={handleCloseModal} className="absolute top-2 right-2 text-gray-400 hover:text-white">
-                                &times;
-                            </button>
-                            <h3 className="text-2xl font-semibold mb-4">{scholarships[selectedScholarshipIndex].title}</h3>
-                            <img src={scholarships[selectedScholarshipIndex].image} alt={scholarships[selectedScholarshipIndex].title} className="w-32 h-auto mx-auto mb-4 shadow-md" />
-                            <p className="text-gray-400 mb-2"><strong>Location:</strong> {scholarships[selectedScholarshipIndex].location}</p>
-                            <p className="text-gray-400 mb-2"><strong>Date:</strong> {scholarships[selectedScholarshipIndex].date}</p>
-                            <p className="text-gray-400 mb-2"><strong>Duration:</strong> {scholarships[selectedScholarshipIndex].duration}</p>
-                            <p className="text-gray-400 mb-2"><strong>Amount:</strong> {scholarships[selectedScholarshipIndex].amount}</p>
-                            <p className="text-gray-400 mb-2"><strong>Eligibilty:</strong> {scholarships[selectedScholarshipIndex].eligibilty}</p>
-                            <p className="text-gray-400 mb-2"><strong>Funding Type:</strong> {scholarships[selectedScholarshipIndex].fundingType}</p>
-                            <p className="text-gray-400 mb-4"><strong>Description: </strong>{scholarships[selectedScholarshipIndex].description}</p>
-                             
-
-  
+                            <h3 className="text-2xl font-semibold mb-4">{selectedScholarship.title}</h3>
+                            <img src={selectedScholarship.image} alt={selectedScholarship.title} className="w-32 h-32 rounded-full mx-auto mb-4" />
+                            <p className="text-gray-400 mb-2"><strong>Location:</strong> {selectedScholarship.location}</p>
+                            <p className="text-gray-400 mb-2"><strong>Date:</strong> {selectedScholarship.date}</p>
+                            <p className="text-gray-400 mb-2"><strong>Duration:</strong> {selectedScholarship.duration}</p>
+                            <p className="text-gray-400 mb-2"><strong>Amount:</strong> {selectedScholarship.amount}</p>
+                            <p className="text-gray-400 mb-2"><strong>Eligibility:</strong> {selectedScholarship.eligibility}</p>
+                            <p className="text-gray-400 mb-2"><strong>Funding Type:</strong> {selectedScholarship.fundingType}</p>
+                            <p className="text-gray-400 mb-4"><strong>Description: </strong>{selectedScholarship.description}</p>
                             <a
-                                href={scholarships[selectedScholarshipIndex].link}
+                                href={selectedScholarship.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-blue-400 underline"
@@ -119,21 +119,19 @@ const Scholarship = () => {
                                     Apply Now
                                 </button>
                             </a>
-                            <div className="flex justify-between mt-4">
-                                <button
-                                    onClick={handlePrevious}
-                                    className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-                                >
-                                    Previous
-                                </button>
-                                <button
-                                    onClick={handleNext}
-                                    className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-                                >
-                                    Next
-                                </button>
-                            </div>
                         </div>
+                        <button
+                            onClick={handlePrevious}
+                            className="absolute left-64 top-1/2 transform -translate-y-1/2 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                        >
+                            <GrCaretPrevious />
+                        </button>
+                        <button
+                            onClick={handleNext}
+                            className="absolute right-64 top-1/2 transform -translate-y-1/2 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                        >
+                            <GrCaretNext />
+                        </button>
                     </div>
                 )}
             </div>
