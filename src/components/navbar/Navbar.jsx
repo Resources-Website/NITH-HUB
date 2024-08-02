@@ -51,7 +51,7 @@ const Navbar = () => {
                     </a>
                     <div className="flex md:order-2 space-x-3 rtl:space-x-reverse items-center">
 
-                        {photoURL ? (
+                        {/* {photoURL ? (
                             <div className="relative">
                                 <img
                                     src={photoURL}
@@ -81,7 +81,7 @@ const Navbar = () => {
                             onClick={handleSignOut}
                         >
                             Sign Out
-                        </button>
+                        </button> */}
                         <button
                             onClick={toggleMobileMenu}
                             type="button"
