@@ -3,13 +3,16 @@ import debounce from 'lodash/debounce';
 import AddScholarship from './AddScholarship';
 import { GrCaretPrevious, GrCaretNext } from "react-icons/gr";
 import { GoAlert } from "react-icons/go";
-import ReportIssueForm from "../report/Report";
+import { FaRegEdit } from "react-icons/fa";
+import ReportIssueForm from "./report/Report";
+import EditScholarship from "./edit/Edit";
 
 const Scholarship = () => {
     const [scholarships, setScholarships] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedScholarship, setSelectedScholarship] = useState(null);
     const [reportScholarship, setReportScholarship] = useState(null);
+    const [editScholarship, setEditScholarship] = useState(null);
 
     useEffect(() => {
         fetch('http://localhost:8000/scholarships')
@@ -62,6 +65,18 @@ const Scholarship = () => {
         setReportScholarship(null);
     };
 
+    const handleEditClick = (scholarship) => {
+        setEditScholarship(scholarship);
+    };
+
+    const handleCloseEdit = () => {
+        setEditScholarship(null);
+    };
+
+    const handleSaveEdit = (updatedScholarship) => {
+        setScholarships(scholarships.map(s => s._id === updatedScholarship._id ? updatedScholarship : s));
+    };
+
     const filteredScholarships = scholarships.filter((scholarship) => {
         return (
             scholarship.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -101,6 +116,9 @@ const Scholarship = () => {
                             </div>
                             <div className="absolute bottom-6 right-6" onClick={(e) => { e.stopPropagation(); handleAlertClick(scholarship); }}>
                                 <GoAlert />
+                            </div>
+                            <div className="absolute top-6 right-6" onClick={(e) => { e.stopPropagation(); handleEditClick(scholarship); }}>
+                                <FaRegEdit />
                             </div>
                         </div>
                     ))
@@ -150,6 +168,9 @@ const Scholarship = () => {
                 )}
                 {reportScholarship && (
                     <ReportIssueForm scholarship={reportScholarship} onClose={handleCloseReport} />
+                )}
+                {editScholarship && (
+                    <EditScholarship scholarship={editScholarship} onClose={handleCloseEdit} onSave={handleSaveEdit} />
                 )}
             </div>
         </div>
