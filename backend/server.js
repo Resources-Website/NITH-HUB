@@ -6,21 +6,23 @@ import Scholarship from './models/Scholarship.js'; // Ensure you have this model
 
 const app = express();
 
-const username = '22bph040';
-const password = 'eb8APetEwYQUR8V4';
-const clusterUrl = `mongodb+srv://${username}:${password}@cluster0.o4y2lbm.mongodb.net`;
-const dbName = 'Scholarships';
+const username = process.env.MONGO_USERNAME;
+const password = process.env.MONGO_PASSWORD;
+const clusterUrl = process.env.MONGO_CLUSTER_URL;
+const dbName = process.env.MONGO_DB_NAME;
 
-const uri = `${clusterUrl}/${dbName}?retryWrites=true&w=majority&appName=search-test`;
+const uri = `mongodb+srv://${username}:${password}@${clusterUrl}/${dbName}?retryWrites=true&w=majority&appName=search-test`;
 
-mongoose.connect(uri)
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to MongoDB Atlas'))
     .catch((error) => console.error('Error connecting to MongoDB Atlas:', error));
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://nith-hub.vercel.app/'
+}));
 app.use(bodyParser.json());
 
-app.post('/add-scholarship', async(req, res) => {
+app.post('/add-scholarship', async (req, res) => {
     try {
         const newScholarship = new Scholarship(req.body);
         await newScholarship.save();
@@ -32,7 +34,6 @@ app.post('/add-scholarship', async(req, res) => {
     }
 });
 
-// New route to fetch scholarships
 app.get('/scholarships', async (req, res) => {
     try {
         const scholarships = await Scholarship.find();
