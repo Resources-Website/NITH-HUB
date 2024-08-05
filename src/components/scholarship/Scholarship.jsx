@@ -106,7 +106,7 @@ const Scholarship = () => {
                             className="bg-gray-800 text-white rounded-lg shadow-md p-6 mb-4 flex items-center space-x-4 cursor-pointer relative"
                             onClick={() => handleCardClick(scholarship)}
                         >
-                            <img src={scholarship.image} alt={scholarship.title} className="w-16 h-16 rounded-full" />
+                            <img src={scholarship.image} alt={scholarship.title} className="w-20 h-auto shadow-md" />
                             <div className="flex-grow">
                                 <h3 className="text-xl font-semibold">{scholarship.title}</h3>
                                 <p className="text-gray-400">Eligibility: {scholarship.eligibility}</p>
@@ -124,13 +124,13 @@ const Scholarship = () => {
                     ))
                 )}
                 {selectedScholarship && (
-                    <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
-                        <button onClick={handleCloseModal} className="absolute top-4 right-4 text-gray-50 hover:text-white z-50">
+                    <div className="fixed inset-0 bg-black bg-opacity-80 flex items-start justify-center z-50 overflow-y-scroll">
+                        <button onClick={handleCloseModal} className="fixed top-4 right-10 text-gray-50 hover:text-white z-50">
                             &times;
                         </button>
                         <div className="bg-gray-800 text-white rounded-lg shadow-md p-6 w-full max-w-lg relative">
                             <h3 className="text-2xl font-semibold mb-4">{selectedScholarship.title}</h3>
-                            <img src={selectedScholarship.image} alt={selectedScholarship.title} className="w-32 h-32 rounded-full mx-auto mb-4" />
+                            <img src={selectedScholarship.image} alt={selectedScholarship.title} className="w-32 h-auto mx-auto mb-4 shadow-md" />
                             <p className="text-gray-400 mb-2"><strong>Location:</strong> {selectedScholarship.location}</p>
                             <p className="text-gray-400 mb-2"><strong>Date:</strong> {selectedScholarship.date}</p>
                             <p className="text-gray-400 mb-2"><strong>Duration:</strong> {selectedScholarship.duration}</p>
@@ -154,13 +154,13 @@ const Scholarship = () => {
                         </div>
                         <button
                             onClick={handlePrevious}
-                            className="absolute left-64 top-1/2 transform -translate-y-1/2 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                            className="fixed left-60 top-1/2 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
                         >
                             <GrCaretPrevious />
                         </button>
                         <button
                             onClick={handleNext}
-                            className="absolute right-64 top-1/2 transform -translate-y-1/2 text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                            className="fixed right-64 top-1/2  text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
                         >
                             <GrCaretNext />
                         </button>

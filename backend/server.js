@@ -20,7 +20,7 @@ mongoose.connect(uri)
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/add-scholarship', async(req, res) => {
+app.post('/add-scholarship', async (req, res) => {
     try {
         const newScholarship = new Scholarship(req.body);
         await newScholarship.save();
