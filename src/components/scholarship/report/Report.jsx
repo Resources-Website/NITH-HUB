@@ -73,7 +73,7 @@ const ReportIssueForm = ({ scholarship, onClose }) => {
                         <textarea
                             value={otherIssue}
                             onChange={(e) => setOtherIssue(e.target.value)}
-                            placeholder="Please describe the issue"
+                            placeholder="Please describe the issues"
                             className="w-full mt-2 p-2 text-white rounded-lg"
                         />
                     )}
