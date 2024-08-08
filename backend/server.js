@@ -2,7 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import Scholarship from './models/Scholarship.js'; // Ensure you have this model defined
+import Scholarship from './models/Scholarship.js'; // Model for scholarships
+import Internship from './models/Internship.js'; // Model for internships
 
 const app = express();
 
@@ -20,6 +21,7 @@ mongoose.connect(uri)
 app.use(cors());
 app.use(bodyParser.json());
 
+// Route to add a new scholarship
 app.post('/add-scholarship', async (req, res) => {
     try {
         const newScholarship = new Scholarship(req.body);
@@ -32,13 +34,24 @@ app.post('/add-scholarship', async (req, res) => {
     }
 });
 
-// New route to fetch scholarships
+// Route to fetch all scholarships
 app.get('/scholarships', async (req, res) => {
     try {
         const scholarships = await Scholarship.find();
         res.json(scholarships);
     } catch (error) {
         console.error('Error fetching scholarships:', error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Route to fetch all internships
+app.get('/internships', async (req, res) => {
+    try {
+        const internships = await Internship.find();
+        res.json(internships);
+    } catch (error) {
+        console.error('Error fetching internships:', error);
         res.status(500).json({ message: error.message });
     }
 });
