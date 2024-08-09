@@ -12,11 +12,13 @@
   "dependencies": {
     "axios": "^1.7.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "firebase": "^10.12.2",
     "lodash": "^4.17.21",
     "mongodb": "^6.8.0",
     "mongoose": "^8.4.5",
+    "nodemailer": "^6.9.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.1",

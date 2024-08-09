@@ -7,8 +7,30 @@ const ReportIssueForm = ({ scholarship, onClose }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const issue = selectedIssue === 'Other' ? otherIssue : selectedIssue;
-        console.log(`Report for ${scholarship.title}: ${issue}`);
-        onClose();
+
+        // Send the form data to the backend
+        fetch('http://localhost:8000/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: scholarship.title,
+                issue,
+                description: otherIssue || '',
+            }),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Failed to send email');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data.message);
+                onClose();
+            })
+            .catch((error) => console.error('Error:', error));
     };
 
     return (
@@ -90,5 +112,3 @@ const ReportIssueForm = ({ scholarship, onClose }) => {
 };
 
 export default ReportIssueForm;
-
-
